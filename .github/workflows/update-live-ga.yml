@@ -18,7 +18,7 @@ jobs:
       - name: Run governance actions update script
         run: |
           echo "Running governance actions update script..."
-          bash script/update-live-ga.sh
+          bash script/live-ga.sh
       - name: Commit and push changes
         run: |
           echo "Committing and pushing changes..."
