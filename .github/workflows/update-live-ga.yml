@@ -3,6 +3,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *' # Every day at midnight UTC
+permissions:
+  contents: write
 jobs:
   update-live-governance-actions:
     runs-on: ubuntu-latest
