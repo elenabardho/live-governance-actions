@@ -2,7 +2,7 @@ name : Update Live Governance Actions
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # Every day at midnight UTC
+    - cron: '0 11 * * *' # Every day at 11:00 UTC
 permissions:
   contents: write
 jobs:
