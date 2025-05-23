@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "Committing and pushing changes..."
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          NEW_FILES="live_ga.csv"
+          NEW_FILES="live-ga.json"
           git add -f $NEW_FILES
           git commit -m "Update governance actions data"
           git push origin main
