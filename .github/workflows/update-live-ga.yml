@@ -3,6 +3,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *' # Every day at midnight UTC
+permissions:
+  contents: write
 jobs:
   update-live-governance-actions:
     runs-on: ubuntu-latest
@@ -19,11 +21,14 @@ jobs:
         run: |
           echo "Running governance actions update script..."
           bash script/live-ga.sh
+      - name: Set up Git user
+        run: |
+          git config --global user.email "ebardho17@epoka.edu.al"
+          git config --global user.name "Elena Bardho"
       - name: Commit and push changes
         run: |
           echo "Committing and pushing changes..."
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           NEW_FILES="live-ga.json"
           git add -f $NEW_FILES
           git commit -m "Update governance actions data"
-          git push origin main
+          git push origin $(git rev-parse --abbrev-ref HEAD)
