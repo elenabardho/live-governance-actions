@@ -1,0 +1,29 @@
+name : Update Live Governance Actions
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Every day at midnight UTC
+jobs:
+  update-live-governance-actions:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          sudo apt-get update
+          sudo apt-get install -y jq curl
+      - name: Run governance actions update script
+        run: |
+          echo "Running governance actions update script..."
+          bash script/update-live-ga.sh
+      - name: Commit and push changes
+        run: |
+          echo "Committing and pushing changes..."
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          NEW_FILES="live_ga.csv"
+          git add -f $NEW_FILES
+          git commit -m "Update governance actions data"
+          git push origin main
